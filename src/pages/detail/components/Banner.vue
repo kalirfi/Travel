@@ -1,33 +1,42 @@
 <template>
   <div>
       <div class="banner" @click="handleBannerClick()">
-          <img class="banner-img" src=""/>
+          <img class="banner-img" :src="bannerImg"/>
           <div class="banner-info">
-            <div class="banner-title">11111111
+            <div class="banner-title">{{this.sightName}}
             </div>
             <div class="banner-number">
-              <span class="iconfont banner-icon">&#xe67b;</span>39
+              <span class="iconfont banner-icon">&#xe698;</span>
+              {{this.gallaryImgs.length}}
             </div>
           </div>
       </div>
-      <common-gallary :imgs="imgs" v-show="showGallary"
-       @close="handleGallaryClose()"
-      ></common-gallary>
+      <common-fade>
+          <common-gallary :imgs="gallaryImgs" v-show="showGallary"
+           @close="handleGallaryClose()"
+          ></common-gallary>
+      </common-fade>
   </div>
 </template>
 
 <script>
 import CommonGallary from 'common/gallary/Gallary'
+import CommonFade from 'common/fade/Fade'
 export default {
   name: 'DetailBanner',
   data () {
     return {
-      imgs: [],
       showGallary: false
     }
   },
+  props: {
+    sightName: String,
+    bannerImg: String,
+    gallaryImgs: Array
+  },
   components: {
-    CommonGallary
+    CommonGallary,
+    CommonFade
   },
   methods: {
     handleBannerClick () {
@@ -42,7 +51,6 @@ export default {
 
 <style lang="stylus" scoped>
   .banner
-    background: blue
     position: relative
     overflow: hidden
     height: 0
